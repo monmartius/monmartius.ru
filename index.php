@@ -17,7 +17,6 @@ $dbName = "monmartius_ru";
 
   try {
 
-  	echo "1<br>";
     $conn = new PDO("mysql:host=46.173.213.161;dbname=monmartius_ru", "monmartius", "9181k9181K");
 
 
