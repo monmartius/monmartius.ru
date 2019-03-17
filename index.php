@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>monmartius.ru</title>
+  <meta charset="UTF-8">
+  <title>monmartius.ru</title>
   <link rel="stylesheet" href="css/bootstrap.css">
   <script src="js/bootstrap.js"></script>
   <style>
@@ -31,50 +31,38 @@ $dbName = "monmartius_ru";
 
 //46.173.213.161
 
-  try {
+//   try {
 
-    $conn = new PDO("mysql:host=46.173.213.161;dbname=monmartius_ru", "monmartius", "9181k9181K");
+//     $conn = new PDO("mysql:host=46.173.213.161;dbname=monmartius_ru", "monmartius", "9181k9181K");
 
-    echo "Подключение к базе прошло успешно.";
-    // // $conn = new PDO("mysql:host=46.173.213.161;dbname=monmartius_ru", "root", "");
+//     echo "Подключение к базе прошло успешно.";
 
-    // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo 'Подключение к базе данных.<br>';
 
-    // $sql = 'SELECT name FROM employee';
-    
-    // print "Имя Сотрудника:<br>";
-    // foreach ($conn->query($sql) as $row) {
-    //     print $row['name'] . "<br>";
-    // }
-    // $conn = null;
+//   }
+//   catch(PDOException $err) {
+//     echo "Ошибка: не удается подключиться: " . $err->getMessage();
+//   }
 
-  }
-  catch(PDOException $err) {
-    echo "Ошибка: не удается подключиться: " . $err->getMessage();
-  }
-
+// print_r($_REQUEST);
 
   $linx = file_get_contents("linx.txt");
 
 
-// isset($REQUEST['link']) 
-//       &&  
-      // &&  isset($REQUEST['description']) 
-      // && !isset($REQUEST['email']) 
-  // isset($REQUEST['link']
-
   if(
-      isset($REQUEST['link']) &&
-      isset($REQUEST['description']) &&
-      !isset($REQUEST['email'])
+      !empty($_REQUEST['link']) &&
+      !empty($_REQUEST['description']) &&
+      empty($_REQUEST['email'])
     ) {
 
-    $linx .= '<p><a href = "' . $link . '">' . $description . "</a></p>";
+    $link = $_REQUEST['link'];
+    $description = $_REQUEST['description'];
 
+    $linx .= '<p><a href = "' . $link . '">' . $description . "</a></p>";
+    file_put_contents("linx.txt", $linx);
   } 
 
-	?>
+
+  ?>
 
 <form id ="form" action="/" name="link">
   <span>Link:</span><input type="text" name="link" cols="50"><br>
@@ -86,6 +74,7 @@ $dbName = "monmartius_ru";
 <?php  
   
   echo $linx;
+
 
 ?>
 
