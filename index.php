@@ -5,6 +5,19 @@
 	<title>monmartius.ru</title>
   <link rel="stylesheet" href="css/bootstrap.css">
   <script src="js/bootstrap.js"></script>
+  <style>
+    #form {
+
+      width: 300px;
+      text-align: right;
+    }
+    #form span {
+      width: 100px;
+      display: inline-block;
+      text-align: right;
+      padding: 5px;
+    }
+  </style>
 </head>
 <body>
 <?php 
@@ -13,6 +26,7 @@ $hostname = 'monmartius.ru:3306';
 $username = "root";
 $password = "9181k9181K";
 $dbName = "monmartius_ru";
+
 
 
 //46.173.213.161
@@ -41,15 +55,39 @@ $dbName = "monmartius_ru";
   }
 
 
+  $linx = file_get_contents("linx.txt");
+
+
+// isset($REQUEST['link']) 
+//       &&  
+      // &&  isset($REQUEST['description']) 
+      // && !isset($REQUEST['email']) 
+  // isset($REQUEST['link']
+
+  if(
+      isset($REQUEST['link']) &&
+      isset($REQUEST['description']) &&
+      !isset($REQUEST['email'])
+    ) {
+
+    $linx .= '<p><a href = "' . $link . '">' . $description . "</a></p>";
+
+  } 
+
 	?>
 
-<form action="/" name="link">
-  Link: <input type="text" name="link"><br>
-  Description: <input type="text" name="description"><br>
-  Email: <input type="text" name="email"><br>
+<form id ="form" action="/" name="link">
+  <span>Link:</span><input type="text" name="link" cols="50"><br>
+  <span>Description:</span><input type="text" name="description" cols="50"><br>
+  <span>Email:</span><input type="text" name="email" cols="50"><br>
   <button value="Submit" type="submit">Submit</button>
 </form>
 
+<?php  
+  
+  echo $linx;
+
+?>
 
 </body>
 </html>
